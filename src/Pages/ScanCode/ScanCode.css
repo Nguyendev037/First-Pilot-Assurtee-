@@ -1,0 +1,107 @@
+.ScanPages {
+  width: 370px;
+  display: flex;
+  margin: 0 auto;
+  flex-direction: column;
+}
+
+.scan-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.scan-header i {
+  margin-right: 75px;
+}
+
+.scan-header p {
+  text-align: center;
+  font-family: NotoSansCJ-Black;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 64px;
+  color: #000000;
+}
+
+.scaner-banner {
+  text-align: center;
+  font-size: 24px;
+  margin-top: 32px;
+  margin-bottom: 50px;
+  font-weight: bold;
+  font-family: AppleSDGoThicH;
+}
+/* Pyramid Layout */
+.input-pyramid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  justify-items: center;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+  position: relative;
+}
+
+.input-pyramid input:nth-child(1),
+.input-pyramid input:nth-child(2),
+.input-pyramid input:nth-child(3) {
+  grid-row: 1;
+}
+
+.input-pyramid input:nth-child(4),
+.input-pyramid input:nth-child(5) {
+  grid-row: 2;
+}
+
+.input-pyramid input:nth-child(6),
+.input-pyramid input:nth-child(7),
+.input-pyramid input:nth-child(8),
+.input-pyramid input:nth-child(9),
+.input-pyramid input:nth-child(10) {
+  grid-row: 3;
+}
+
+.input-box {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  font-size: 24px;
+  font-family: AppleSDGoThicH;
+  font-weight: bold;
+  background-color: #feeed9;
+  border-radius: 6px;
+  border : none;
+  color:  #ff8d02;
+}
+
+.input-box:focus {
+  background-color: #fff;
+  border: solid 2px #ff8d02;
+  outline:none;
+}
+
+.confirm-button {
+  margin: 336px 30px 0;
+  background-color: #d3d3d3;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  width: 300px;
+  height: 50px;
+  padding: 16px 120px 14px;
+  font-weight: bold;
+  font-family: AppleSDGoThicEB;
+  font-size: 16px;
+}
+
+.confirm-button.active {
+  background-color: #ff9900;
+  cursor: pointer;
+}
+
+.confirm-button.active:hover {
+  background-color: #ff8500;
+}

@@ -1,4 +1,6 @@
 :root {
+ 
+  
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -20,4 +22,19 @@
 @font-face {
   font-family: AppleSDGothicB;
   src: url("../public/AppleSDGothicNeoB.ttf");
+}
+
+@font-face{
+  font-family: NotoSansCJ-Black;
+  src: url("../public/NotoSansCJKkr-Black");;
+}
+
+@font-face {
+  font-family: AppleSDGoThicH ;
+  src: url("../public/AppleSDGothicNeoH.ttf");
+}
+
+@font-face {
+  font-family: AppleSDGoThicEB ;
+  src: url("../public/AppleSDGothicNeoEB.ttf");
 }

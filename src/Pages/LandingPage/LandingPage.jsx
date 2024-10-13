@@ -6,24 +6,21 @@ import group7 from "../../assets/Images/group-7.png";
 import group25 from "../../assets/Images/group-25.png";
 import group26 from "../../assets/Images/group-26.png";
 import group8 from "../../assets/Images/group-8.png";
-import mainLogo from "../../assets/Images/ci.png"
-import onTopIcon from "../../assets/Images/top.png"
-
+import mainLogo from "../../assets/Images/ci.png";
+import onTopIcon from "../../assets/Images/top.png";
 
 import { Accordion, AccordionSummary } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-
+import AddIcon from "@mui/icons-material/Add";
+import { Link } from "react-router-dom";
 import "./LandingPage.css";
 
 export default function LandingPage() {
-
   const onTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth"
-    })
-  }
-
+      behavior: "smooth",
+    });
+  };
 
   return (
     <div className="LandingPage">
@@ -51,27 +48,33 @@ export default function LandingPage() {
             <p>입력 방식을 선택해 주세요.</p>
           </div>
           <div className="function-item">
-            
-              <div className="item">
+            <div className="item">
+              <Link to={"/Scancode"} style={{ textDecoration: "none" }}>
                 <div className="item-detail">
                   <img src={group25} alt="" />
                   <p>
-                    <span>사업자등록번호 <br/>
-                      직접입력</span>
+                    <span>
+                      사업자등록번호 <br />
+                      직접입력
+                    </span>
                   </p>
                 </div>
-              </div>
-              <div className="item">
+              </Link>
+            </div>
+            <div className="item">
+              <Link to={"/ScanImage"} style={{ textDecoration: "none" }}>
                 <div className="item-detail">
                   <img src={group26} alt="" />
                   <p>
-                    <span>사업자등증 <br/>
-                      촬영(스캔)입력</span>
+                    <span>
+                      사업자등증 <br />
+                      촬영(스캔)입력
+                    </span>
                   </p>
                 </div>
-              </div>
+              </Link>
             </div>
-          
+          </div>
         </section>
 
         <section className="banner-2">
@@ -80,13 +83,11 @@ export default function LandingPage() {
 
         <section className="footer">
           <div className="footer-logo">
-
             <img src={mainLogo} alt="" />
 
             <button onClick={onTop}>
               <img src={onTopIcon} alt="" />
             </button>
-
           </div>
           <div className="footer-info">
             <p>
@@ -103,19 +104,18 @@ export default function LandingPage() {
             <div>
               <Accordion className="footer-accordion">
                 <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
+                  expandIcon={<AddIcon/>}
                   aria-controls="panel1-content"
                   id="panel1-header"
                 >
-                  
-                    <p>관련사이트</p>
-                
+                  <p>관련사이트</p>
                 </AccordionSummary>
               </Accordion>
             </div>
-          </div>
-          <div className="footer-end">
-            © assuretee Inc. All Rights Reserved.
+
+            <div className="footer-end">
+              © assuretee Inc. All Rights Reserved.
+            </div>
           </div>
         </section>
       </section>

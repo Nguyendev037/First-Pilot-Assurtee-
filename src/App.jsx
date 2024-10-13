@@ -3,12 +3,29 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import LandingPage from './Pages/LandingPage/LandingPage'
+import ScanCode from './Pages/ScanCode/ScanCode'
+import ScanImage from './Pages/ScanImage/ScanImage'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 function App() {
 
+  const router = createBrowserRouter ([
+    {
+      path: "/",
+      element: <LandingPage/>
+    },
+    {
+      path: "/Scancode",
+      element: <ScanCode/>
+    },
+    {
+      path: "/ScanImage",
+      element: <ScanImage/>
+    }
+  ])
+
+
   return (
-    <>
-     <LandingPage/>
-    </>
+      <RouterProvider router={router} />
   )
 }
 

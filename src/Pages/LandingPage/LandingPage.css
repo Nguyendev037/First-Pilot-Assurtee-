@@ -85,7 +85,6 @@
   grid-template-columns: auto auto;
   column-gap: 10px;
   margin-bottom: 100px;
-  
 }
 
 .function-item .item  {
@@ -105,6 +104,7 @@
   line-height: 24px;
   margin-top: 18px;
   border-radius: 20px;
+  color: black;
 }
 
 .function-item .item .item-detail  {
@@ -158,16 +158,23 @@
   font-family: AppleSDGothicSB;
 }
 
-/* .footer-accordion{
-  color: #fff !important;
-  height: 38px !important;
+.footer-accordion{
+  background-color: #333;
+  color: #fff;
+  border-radius: 4px;
+  box-shadow: none;
+  margin-bottom: 30px;
+  margin-top: 25px;
 }
 
-.footer-accordion p{
+.footer-accordion .MuiAccordionSummary-root {
+  background-color: #343434; 
+  height: 38px;
   color: #fff !important;
-
-} */
-
+}
+.MuiSvgIcon-root {
+  color: #ffff !important;
+}
 
 @media screen and (min-width: 370px) {
 }
