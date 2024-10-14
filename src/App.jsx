@@ -5,10 +5,10 @@ import './App.css'
 import LandingPage from './Pages/LandingPage/LandingPage'
 import ScanCode from './Pages/ScanCode/ScanCode'
 import ScanImage from './Pages/ScanImage/ScanImage'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import {  createHashRouter, RouterProvider } from 'react-router-dom'
 function App() {
 
-  const router = createBrowserRouter ([
+  const router = createHashRouter ([
     {
       path: "/",
       element: <LandingPage/>

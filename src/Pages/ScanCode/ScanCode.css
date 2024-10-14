@@ -35,34 +35,16 @@
 }
 /* Pyramid Layout */
 .input-pyramid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-direction: row;
   gap: 10px;
-  justify-items: center;
   justify-content: center;
   align-items: center;
-  margin: 20px 0;
+  margin-top: 10px;
   position: relative;
 }
 
-.input-pyramid input:nth-child(1),
-.input-pyramid input:nth-child(2),
-.input-pyramid input:nth-child(3) {
-  grid-row: 1;
-}
 
-.input-pyramid input:nth-child(4),
-.input-pyramid input:nth-child(5) {
-  grid-row: 2;
-}
-
-.input-pyramid input:nth-child(6),
-.input-pyramid input:nth-child(7),
-.input-pyramid input:nth-child(8),
-.input-pyramid input:nth-child(9),
-.input-pyramid input:nth-child(10) {
-  grid-row: 3;
-}
 
 .input-box {
   width: 40px;

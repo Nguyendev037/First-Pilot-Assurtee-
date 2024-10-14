@@ -30,11 +30,16 @@
 }
 
 @font-face {
-  font-family: AppleSDGoThicH ;
-  src: url("../public/AppleSDGothicNeoH.ttf");
+  font-family: AppleSDGoThicH;
+  src: url("../public/AppleSDGothicNeoH.ttf") format("true-type");
 }
 
 @font-face {
   font-family: AppleSDGoThicEB ;
   src: url("../public/AppleSDGothicNeoEB.ttf");
+}
+
+@font-face{
+  font-family: AppleSDGothicNeoM;
+  src: url("../public/AppleSDGothicNeoM.ttf") format("true-type");
 }
