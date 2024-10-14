@@ -11,35 +11,35 @@
 
 @font-face {
   font-family: BMDDOHYEON ;
-  src: url("../public/BMDOHYEON_otf.otf");
+  src: url("/BMDOHYEON_otf.otf");
 }
 
 @font-face {
   font-family: AppleSDGothicSB;
-  src: url("../public/AppleSDGothicNeoSB.ttf");
+  src: url("/AppleSDGothicNeoSB.ttf");
 }
 
 @font-face {
   font-family: AppleSDGothicB;
-  src: url("../public/AppleSDGothicNeoB.ttf");
+  src: url("/AppleSDGothicNeoB.ttf");
 }
 
 @font-face{
   font-family: NotoSansCJ-Black;
-  src: url("../public/NotoSansCJKkr-Black");;
+  src: url("/NotoSansCJKkr-Black");;
 }
 
 @font-face {
   font-family: AppleSDGoThicH;
-  src: url("../public/AppleSDGothicNeoH.ttf") format("true-type");
+  src: url("/AppleSDGothicNeoH.ttf") format("true-type");
 }
 
 @font-face {
   font-family: AppleSDGoThicEB ;
-  src: url("../public/AppleSDGothicNeoEB.ttf");
+  src: url("/AppleSDGothicNeoEB.ttf");
 }
 
 @font-face{
   font-family: AppleSDGothicNeoM;
-  src: url("../public/AppleSDGothicNeoM.ttf") format("true-type");
+  src: url("/AppleSDGothicNeoM.ttf") format("true-type");
 }
