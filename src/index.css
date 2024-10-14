@@ -1,11 +1,15 @@
-:root {
- 
-  
+*{
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
 
+:root {
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
 }
 
 
@@ -31,7 +35,7 @@
 
 @font-face {
   font-family: AppleSDGoThicH;
-  src: url("/AppleSDGothicNeoH.ttf") format("true-type");
+  src: url("/AppleSDGoThicNeoH.ttf") format("true-type");
 }
 
 @font-face {
@@ -43,3 +47,4 @@
   font-family: AppleSDGothicNeoM;
   src: url("/AppleSDGothicNeoM.ttf") format("true-type");
 }
+

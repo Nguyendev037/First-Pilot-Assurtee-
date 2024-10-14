@@ -5,6 +5,8 @@ import './App.css'
 import LandingPage from './Pages/LandingPage/LandingPage'
 import ScanCode from './Pages/ScanCode/ScanCode'
 import ScanImage from './Pages/ScanImage/ScanImage'
+import ScanOutput from './Pages/ScanOutput/ScanOutput'
+import ScanProcess from './Pages/ScanProcess/ScanProcess'
 import {  createHashRouter, RouterProvider } from 'react-router-dom'
 function App() {
 
@@ -20,6 +22,14 @@ function App() {
     {
       path: "/ScanImage",
       element: <ScanImage/>
+    },
+    {
+      path:"/ScanOutput",
+      element:<ScanOutput/>
+    },
+    {
+      path:"/ScanProcess",
+      element:<ScanProcess/>
     }
   ])
 

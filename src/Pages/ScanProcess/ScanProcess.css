@@ -1,0 +1,11 @@
+.scan-process {
+    background-color: #000000 !important;
+    width: 100vw !important;
+    height: 68px;
+    text-align:center;
+    justify-content: center;
+}
+
+.scan-process .header-title {
+    color: white !important;
+}

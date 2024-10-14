@@ -1,0 +1,47 @@
+
+.ScanOutput{
+    width: 370px;
+    justify-content: center;
+    align-items: center;
+}
+
+.ScanOutPut1 {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.label{
+    font-size: 12px !important;
+    line-height: 28px !important;
+    font-weight: 500 !important;
+    font-family: AppleSDGothicNeoM !important;
+}
+
+.scan-output{
+    font-size: 16px !important;
+    font-weight: bolder !important;
+    line-height: 28px !important;
+    font-family: AppleSDGoThicH !important;
+}
+
+.locate {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-wrap: all;
+}
+
+.locate button {
+    font-family: AppleSDGothicNeoM;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: center;
+    padding: 7px 14px;
+    border-color:  #ea3062;
+    color:  #ea3062;
+    background-color: white;
+    border-radius: 15px;
+}

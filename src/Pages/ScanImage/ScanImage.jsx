@@ -91,7 +91,7 @@ export default function ScanImage() {
 
       <button
         className="confirm-button active"
-        style={{ padding: "16px 80px 14px", margin: "131px" }}
+        style={{ padding: "16px 80px 14px", marginTop: "131px" }}
         onClick={handleScanImage}
       >
         사업자등록번호

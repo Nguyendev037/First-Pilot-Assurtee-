@@ -1,24 +1,10 @@
-.LandingPage {
-  width: 370px;
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-}
 
 .logo {
   display: grid;
   align-items: center;
-  justify-content: start;
+  justify-content: center;
   grid-template-columns: auto auto auto;
   column-gap: 7px;
-  position: relative;
-}
-
-.logo-1 {
-  position: absolute;
-  right: 95px;
-  bottom: 5px;
 }
 
 .banner-1 {
@@ -49,7 +35,7 @@
   background-color: #b0b8bd;
   color: white;
   width: 156px;
-  height: 15px;
+  height: 30px;
   border-radius: 20px;
   padding: 10px 10px;
   position: relative;
@@ -119,7 +105,8 @@
 .footer {
   background-color: #000;
   z-index: 0;
-  position: relative;
+  width: 100% ;
+  padding-left: 30px;
 }
 
 .footer-logo {
@@ -129,15 +116,15 @@
   flex-direction: row;
   align-items: center;
   z-index: 10;
-  padding: 0 20px;
+  position: relative;
 }
 
-.footer::after {
+.footer-logo::after {
   content: "";
   position: absolute;
   width: 100%;
-  height: 1px;
-  top: 70px;
+  height: 2px;
+  top: 80px ;
   background-color: #3a3a3a;
 
 }
@@ -176,5 +163,3 @@
   color: #ffff !important;
 }
 
-@media screen and (min-width: 370px) {
-}

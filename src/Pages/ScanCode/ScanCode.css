@@ -30,7 +30,8 @@
   font-size: 24px;
   margin-top: 32px;
   margin-bottom: 50px;
-  font-weight: bold;
+  line-height: 28px;
+  font-weight: 900;
   font-family: AppleSDGoThicH;
 }
 /* Pyramid Layout */
