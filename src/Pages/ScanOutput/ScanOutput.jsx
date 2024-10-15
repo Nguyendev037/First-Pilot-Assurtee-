@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { Link, useLocation} from "react-router-dom";
 import Logo1 from "../../assets/Images/Logo1.png";
 import path1 from "../../assets/Images/path-10-copy.png";
 import group7 from "../../assets/Images/group-7.png";
@@ -16,12 +16,10 @@ import {
   Typography,
   Divider,
 } from "@mui/material";
-
 import AddIcon from "@mui/icons-material/Add";
-import { Link } from "react-router-dom";
-
 import "./ScanOutput.css";
 export default function ScanOutput() {
+
   const [output, SetOutput] = useState({
     계약자: "홍길동",
     등록번호: "536-87-01775",
@@ -30,6 +28,11 @@ export default function ScanOutput() {
     place: "1003동 213호",
   });
 
+  const location = useLocation();
+
+  const {scanResult} = location.state || {};
+
+  console.log('scanResult: ', scanResult);
 
 
 

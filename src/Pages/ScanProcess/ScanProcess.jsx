@@ -4,13 +4,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { createWorker } from "tesseract.js";
 import Webcam from "react-webcam";
 import { useState, useRef, useCallback, useEffect } from "react";
-import { Height, ScannerRounded } from "@mui/icons-material";
-import { width } from "@mui/system";
 import Swal from "sweetalert2";
 export default function ScanProcess() {
-
   const [output, setOutput] = useState({
-    계약자: null ,
+    계약자: null,
     등록번호: null,
     상호법인명: null,
     주소: null,
@@ -18,65 +15,75 @@ export default function ScanProcess() {
   });
 
   const [lineOutput, setLineOutput] = useState(null);
-
-  const navigate = useNavigate();
   const [image, setImage] = useState();
 
+  
+  
+  const navigate = useNavigate();
   const webcamRef = useRef(null);
 
   const capture = useCallback(async () => {
     try {
-      const imageSrc = webcamRef.current.getScreenshot();
+      const imageSrc = await webcamRef.current.getScreenshot();
       if (imageSrc) {
         await Swal.fire("The picture is captured!");
         setImage(imageSrc);
       }
     } catch (error) {
+      await Swal.fire("Please re-captured the images")
       console.log("error capturing image: ", error);
     }
   }, [webcamRef]);
 
+  // useEffect(()=>{
+  //   if(image) {
+  //     handleScanImage();
+  //   }
+  // },[image])
+
   const handleScanImage = async () => {
+
     await capture();
 
     if (image) {
       console.log("Captured Image:", image);
 
-      const worker = await createWorker('kor');
-  
+      const worker = await createWorker("kor");
 
       try {
         const {
           data: { text, blocks, lines },
         } = await worker.recognize(image);
+
         console.log("Recognized Text:", text);
         console.log("Recognized Line:", lines);
-        
-        setLineOutput(lines)
+
+        setLineOutput(lines);
 
         const extractedData = parseOCRText(text);
         setOutput(extractedData);
 
-        if (Object.values(output.filter(item => item !== null)).length > 3) {
-          navigate("/ScanOutput", {state : {scanResult: output}});
-        }
-        
+        // if (Object.values(output.filter((item) => item !== null)).length > 3) {
+        //   navigate("/ScanOutput", { state: { scanResult: output } });
+        // }
+
+        navigate("/ScanOutput", { state: { scanResult: output } });
 
       } catch (error) {
         console.error("Recognition error:", error);
       }
 
       await worker.terminate();
+
     } else {
       console.error("No image captured.");
     }
   };
 
   const parseOCRText = (text) => {
-
     const lines = text.split("\n");
     let result = {
-      계약자: "홍길동", 
+      계약자: "홍길동",
       등록번호: "",
       상호법인명: "",
       주소: "",
@@ -96,10 +103,6 @@ export default function ScanProcess() {
 
     return result;
   };
-
-
-  console.log('output: ', output);
-  console.log('lineOutput: ', lineOutput);
   const videoConstraints = {
     facingMode: "environment",
   };
@@ -130,28 +133,27 @@ export default function ScanProcess() {
       >
         <button
           className="confirm-button active"
-          style={{ padding: "16px 80px 14px", marginTop:"0px"}}
+          style={{ padding: "16px 80px 14px", marginTop: "0px" }}
           onClick={handleScanImage}
         >
           사업자등록번호
         </button>
       </div>
 
-
-      <section className="text-output" style={{textAlign : "center"}}>
-        {
-          lineOutput && lineOutput.map((line, index) => {
+      <section className="text-output" style={{ textAlign: "center" }}>
+        {lineOutput &&
+          lineOutput.map((line, index) => {
             return (
               <>
-              <p>{line.text}</p>
-              <p>{line.confidence}</p>
+                <p>{line.text}</p>
+                <div style={{marginBottom: "13px"}}>
+                  <p>Confidence Detection:</p>
+                  <p>{line.confidence}</p>
+                </div>
               </>
-            )
-          }) 
-        }
+            );
+          })}
       </section>
-
-
     </div>
   );
 }
