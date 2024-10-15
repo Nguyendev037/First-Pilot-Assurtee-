@@ -1,58 +1,13 @@
 import React from "react";
 import "./ScanImage.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { createWorker } from "tesseract.js";
 import Webcam from "react-webcam";
 import group9 from "../../assets/Images/group-9.png";
 import { useState, useRef, useCallback, useEffect } from "react";
 export default function ScanImage() {
-  const [image, setImage] = useState();
-
-  const webcamRef = useRef(null);
-
-  const capture = useCallback(async () => {
-    try {
-      const imageSrc = webcamRef.current.getScreenshot();
-      if (imageSrc) {
-        setImage(imageSrc);
-      }
-    } catch (error) {
-      console.log("error capturing image: ", error);
-    }
-  }, [webcamRef]);
-
-  const handleScanImage = async () => {
-    await capture();
-
-    if (image) {
-      console.log("Captured Image:", image);
-
-      const worker = await createWorker();
-
-      await worker.loadLanguage("eng+kor+vie");
-      await worker.initialize("eng+kor+vie");
-
-      try {
-        // Pass the base64 image to Tesseract for recognition
-        const {
-          data: { text },
-        } = await worker.recognize(image);
-        console.log("Recognized Text:", text);
-      } catch (error) {
-        console.error("Recognition error:", error);
-      }
-
-      await worker.terminate();
-    } else {
-      console.error("No image captured.");
-    }
-  };
-
-  const videoConstraints = {
-    width: 1280,
-    height: 720,
-    facingMode: "environment",
-  };
+  
+  const navigate = useNavigate();
 
   return (
     <div className="ScanPages">
@@ -77,22 +32,11 @@ export default function ScanImage() {
         <img src={group9} alt="" />
       </section>
 
-      <section className="camera-component">
-        <Webcam
-          width={540}
-          height={720}
-          ref={webcamRef}
-          imageSmoothing={true}
-          forceScreenshotSourceSize={true}
-          screenshotFormat="image/jpeg"
-          videoConstraints={videoConstraints}
-        />
-      </section>
-
+      
       <button
         className="confirm-button active"
         style={{ padding: "16px 80px 14px", marginTop: "131px" }}
-        onClick={handleScanImage}
+        onClick={()=> {navigate("/ScanProcess")}}
       >
         사업자등록번호
       </button>

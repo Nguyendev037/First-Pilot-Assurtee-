@@ -1,11 +1,25 @@
 .scan-process {
-    background-color: #000000 !important;
-    width: 100vw !important;
-    height: 68px;
-    text-align:center;
-    justify-content: center;
+  background-color: #000000 !important;
+  width: 100vw !important;
+  height: 68px;
+  text-align: center;
+  justify-content: center;
 }
 
 .scan-process .header-title {
-    color: white !important;
+  color: white !important;
+}
+
+.scan-component {
+  margin-top: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.webcam-component {
+    border: 3px solid green;
+    width: 30%;
+    padding: 20px;
+    text-align: center;
 }

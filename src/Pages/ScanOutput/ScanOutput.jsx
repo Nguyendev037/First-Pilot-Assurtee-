@@ -93,7 +93,7 @@ export default function ScanOutput() {
             >
               {output.주소}
             </Typography>
-            <button>주소검색</button>
+            <button style={{marginLeft: "5px"}}>주소검색</button>
           </div>
           <Divider sx={{ mt: "13px", mb: "20px" }} />
         </div>
