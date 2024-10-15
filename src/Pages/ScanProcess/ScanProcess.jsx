@@ -17,7 +17,7 @@ export default function ScanProcess() {
     place: null,
   });
 
-  const [lineOutput, setLineOutput] = useState([]);
+  const [lineOutput, setLineOutput] = useState(null);
 
   const navigate = useNavigate();
   const [image, setImage] = useState();
@@ -28,7 +28,7 @@ export default function ScanProcess() {
     try {
       const imageSrc = webcamRef.current.getScreenshot();
       if (imageSrc) {
-        Swal.fire("SweetAlert2 is working!");
+        await Swal.fire("The picture is captured!");
         setImage(imageSrc);
       }
     } catch (error) {
@@ -51,6 +51,8 @@ export default function ScanProcess() {
         } = await worker.recognize(image);
         console.log("Recognized Text:", text);
         console.log("Recognized Line:", lines);
+        
+        setLineOutput(lines)
 
         const extractedData = parseOCRText(text);
         setOutput(extractedData);
@@ -59,7 +61,6 @@ export default function ScanProcess() {
           navigate("/ScanOutput", {state : {scanResult: output}});
         }
         
-        setLineOutput(lines)
 
       } catch (error) {
         console.error("Recognition error:", error);
@@ -98,7 +99,7 @@ export default function ScanProcess() {
 
 
   console.log('output: ', output);
-
+  console.log('lineOutput: ', lineOutput);
   const videoConstraints = {
     facingMode: "environment",
   };
@@ -137,7 +138,7 @@ export default function ScanProcess() {
       </div>
 
 
-      <section className="text-output">
+      <section className="text-output" style={{textAlign : "center"}}>
         {
           lineOutput && lineOutput.map((line, index) => {
             return (
