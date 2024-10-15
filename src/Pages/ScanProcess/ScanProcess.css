@@ -19,7 +19,19 @@
 
 .webcam-component {
     border: 3px solid green;
-    width: 30%;
-    padding: 20px;
+    width: 100%;
+    max-width: 400px;
+    padding: 3px;
     text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+  .webcam-component {
+      width: 90%;
+      max-width: 300px; 
+  }
+
+  .scan-process {
+      height: 50px; 
+  }
 }

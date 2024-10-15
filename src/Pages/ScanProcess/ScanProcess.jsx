@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { createWorker } from "tesseract.js";
 import Webcam from "react-webcam";
 import { useState, useRef, useCallback, useEffect } from "react";
+import { Height } from "@mui/icons-material";
 export default function ScanProcess() {
   const [image, setImage] = useState();
 
@@ -48,8 +49,6 @@ export default function ScanProcess() {
   };
 
   const videoConstraints = {
-    width: 370,
-    height: 700,
     facingMode: "environment",
   };
   return (
@@ -65,13 +64,21 @@ export default function ScanProcess() {
             forceScreenshotSourceSize={true}
             screenshotFormat="image/jpeg"
             videoConstraints={videoConstraints}
+            style={{ width: "100%", height: "100%" }}
           />
         </div>
       </section>
-      <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          marginTop: "50px",
+        }}
+      >
         <button
           className="confirm-button active"
-          style={{ padding: "16px 80px 14px", marginTop: "131px" }}
+          style={{ padding: "16px 80px 14px", marginTop:"0px"}}
           onClick={handleScanImage}
         >
           사업자등록번호
