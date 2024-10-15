@@ -4,16 +4,17 @@ import { Link, useNavigate } from "react-router-dom";
 import { createWorker } from "tesseract.js";
 import Webcam from "react-webcam";
 import { useState, useRef, useCallback, useEffect } from "react";
-import { Height } from "@mui/icons-material";
+import { Height, ScannerRounded } from "@mui/icons-material";
 import { width } from "@mui/system";
+import Swal from "sweetalert2";
 export default function ScanProcess() {
 
   const [output, setOutput] = useState({
-    계약자: "",
-    등록번호: "",
-    상호법인명: "",
-    주소: "",
-    place: "",
+    계약자: null ,
+    등록번호: null,
+    상호법인명: null,
+    주소: null,
+    place: null,
   });
 
   const [lineOutput, setLineOutput] = useState([]);
@@ -27,6 +28,7 @@ export default function ScanProcess() {
     try {
       const imageSrc = webcamRef.current.getScreenshot();
       if (imageSrc) {
+        Swal.fire("SweetAlert2 is working!");
         setImage(imageSrc);
       }
     } catch (error) {
@@ -52,6 +54,10 @@ export default function ScanProcess() {
 
         const extractedData = parseOCRText(text);
         setOutput(extractedData);
+
+        if (Object.values(output.filter(item => item !== null)).length > 3) {
+          navigate("/ScanOutput", {state : {scanResult: output}});
+        }
         
         setLineOutput(lines)
 
