@@ -1,11 +1,24 @@
 import React from "react";
 import "./ScanProcess.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { createWorker } from "tesseract.js";
 import Webcam from "react-webcam";
 import { useState, useRef, useCallback, useEffect } from "react";
 import { Height } from "@mui/icons-material";
+import { width } from "@mui/system";
 export default function ScanProcess() {
+
+  const [output, setOutput] = useState({
+    계약자: "",
+    등록번호: "",
+    상호법인명: "",
+    주소: "",
+    place: "",
+  });
+
+  const [lineOutput, setLineOutput] = useState([]);
+
+  const navigate = useNavigate();
   const [image, setImage] = useState();
 
   const webcamRef = useRef(null);
@@ -27,17 +40,21 @@ export default function ScanProcess() {
     if (image) {
       console.log("Captured Image:", image);
 
-      const worker = await createWorker();
-
-      await worker.loadLanguage("eng+kor+vie");
-      await worker.initialize("eng+kor+vie");
+      const worker = await createWorker('kor');
+  
 
       try {
-        // Pass the base64 image to Tesseract for recognition
         const {
-          data: { text },
+          data: { text, blocks, lines },
         } = await worker.recognize(image);
         console.log("Recognized Text:", text);
+        console.log("Recognized Line:", lines);
+
+        const extractedData = parseOCRText(text);
+        setOutput(extractedData);
+        
+        setLineOutput(lines)
+
       } catch (error) {
         console.error("Recognition error:", error);
       }
@@ -47,6 +64,34 @@ export default function ScanProcess() {
       console.error("No image captured.");
     }
   };
+
+  const parseOCRText = (text) => {
+
+    const lines = text.split("\n");
+    let result = {
+      계약자: "홍길동", 
+      등록번호: "",
+      상호법인명: "",
+      주소: "",
+      place: "",
+    };
+
+    lines.forEach((line) => {
+      if (line.includes("등록번호")) {
+        result.등록번호 = line.split(":")[1]?.trim() || "";
+      } else if (line.includes("상호")) {
+        result.상호법인명 = line.split(":")[1]?.trim() || "";
+      } else if (line.includes("주소")) {
+        result.주소 = line.split(":")[1]?.trim() || "";
+      }
+      // Add more conditions based on the structure of the text.
+    });
+
+    return result;
+  };
+
+
+  console.log('output: ', output);
 
   const videoConstraints = {
     facingMode: "environment",
@@ -84,6 +129,22 @@ export default function ScanProcess() {
           사업자등록번호
         </button>
       </div>
+
+
+      <section className="text-output">
+        {
+          lineOutput && lineOutput.map((line, index) => {
+            return (
+              <>
+              <p>{line.text}</p>
+              <p>{line.confidence}</p>
+              </>
+            )
+          }) 
+        }
+      </section>
+
+
     </div>
   );
 }
