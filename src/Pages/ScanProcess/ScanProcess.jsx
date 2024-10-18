@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { createWorker } from "tesseract.js";
 import Webcam from "react-webcam";
 import { useState, useRef, useCallback, useEffect } from "react";
+import { base64ToBlob, postImage } from "../../Axios/Axios";
 import Swal from "sweetalert2";
 export default function ScanProcess() {
   const [output, setOutput] = useState({
@@ -14,98 +15,80 @@ export default function ScanProcess() {
     place: null,
   });
 
-  const [lineOutput, setLineOutput] = useState(null);
+  const [imageURL, setImageURL] = useState(null);
   const [image, setImage] = useState();
 
-  
-  
   const navigate = useNavigate();
+
   const webcamRef = useRef(null);
 
   const capture = useCallback(async () => {
     try {
       const imageSrc = await webcamRef.current.getScreenshot();
       if (imageSrc) {
-        await Swal.fire("The picture is captured!");
         setImage(imageSrc);
       }
     } catch (error) {
-      await Swal.fire("Please re-captured the images")
+      Swal.fire("Please re-captured the images");
       console.log("error capturing image: ", error);
     }
   }, [webcamRef]);
 
-  // useEffect(()=>{
-  //   if(image) {
-  //     handleScanImage();
-  //   }
-  // },[image])
+  
+  useEffect(() => {
+    const captureFirst = () => {
+        capture();
+    }
+    captureFirst();
+  }, [image]);
 
   const handleScanImage = async () => {
+    try {
+      await capture();
+    } catch (error) {
+      console.log("error", error);
+    }
 
-    await capture();
-
+    //Scan Process Function
     if (image) {
       console.log("Captured Image:", image);
 
-      const worker = await createWorker("kor");
-
       try {
-        const {
-          data: { text, blocks, lines },
-        } = await worker.recognize(image);
+        const imageChange64 =  base64ToBlob(image, "image/jpeg");
 
-        console.log("Recognized Text:", text);
-        console.log("Recognized Line:", lines);
+        const file =  blobToFile(imageChange64, "captured_image.jpg");
 
-        setLineOutput(lines);
+        const fileURL = URL.createObjectURL(file);
 
-        const extractedData = parseOCRText(text);
-        setOutput(extractedData);
+        setImageURL(fileURL)
+        console.log("imageURL: ", imageURL);
+        console.log("Captured Image File: ", file);
+        
+        let response = null;
 
-        // if (Object.values(output.filter((item) => item !== null)).length > 3) {
-        //   navigate("/ScanOutput", { state: { scanResult: output } });
-        // }
+        if (file) {
+          response = await postImage(file);
+        }
 
-        navigate("/ScanOutput", { state: { scanResult: output } });
+        console.log("response: ", response);
 
+        return response;
       } catch (error) {
-        console.error("Recognition error:", error);
+        console.log("error: ", error);
       }
-
-      await worker.terminate();
-
     } else {
       console.error("No image captured.");
     }
   };
 
-  const parseOCRText = (text) => {
-    const lines = text.split("\n");
-    let result = {
-      계약자: "홍길동",
-      등록번호: "",
-      상호법인명: "",
-      주소: "",
-      place: "",
+    const blobToFile = (blob, fileName) => {
+    return new File([blob], fileName, { type: blob.type });
     };
 
-    lines.forEach((line) => {
-      if (line.includes("등록번호")) {
-        result.등록번호 = line.split(":")[1]?.trim() || "";
-      } else if (line.includes("상호")) {
-        result.상호법인명 = line.split(":")[1]?.trim() || "";
-      } else if (line.includes("주소")) {
-        result.주소 = line.split(":")[1]?.trim() || "";
-      }
-      // Add more conditions based on the structure of the text.
-    });
-
-    return result;
-  };
   const videoConstraints = {
     facingMode: "environment",
   };
+
   return (
     <div className="">
       <section className="scan-header scan-process">
@@ -141,18 +124,12 @@ export default function ScanProcess() {
       </div>
 
       <section className="text-output" style={{ textAlign: "center" }}>
-        {lineOutput &&
-          lineOutput.map((line, index) => {
-            return (
-              <>
-                <p>{line.text}</p>
-                <div style={{marginBottom: "13px"}}>
-                  <p>Confidence Detection:</p>
-                  <p>{line.confidence}</p>
-                </div>
-              </>
-            );
-          })}
+        {imageURL && (
+          <div>
+            <h2>Captured Image Preview:</h2>
+            <img src={imageURL} alt="Captured" width="300" />
+          </div>
+        )}
       </section>
     </div>
   );

@@ -22,6 +22,8 @@ export default function LandingPage() {
     });
   };
 
+  console.log(import.meta.env.VITE_nguyen)
+
   return (
     <div>
       <section className="header">

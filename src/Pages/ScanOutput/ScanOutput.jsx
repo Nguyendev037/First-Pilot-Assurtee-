@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation} from "react-router-dom";
 import Logo1 from "../../assets/Images/Logo1.png";
 import path1 from "../../assets/Images/path-10-copy.png";
@@ -20,21 +20,28 @@ import AddIcon from "@mui/icons-material/Add";
 import "./ScanOutput.css";
 export default function ScanOutput() {
 
-  const [output, SetOutput] = useState({
-    계약자: "홍길동",
-    등록번호: "536-87-01775",
-    상호법인명: "홍대우리민박",
-    주소: "경기도 고양시 덕양구 향기5로 66 (향동동, DMC 두산위브 더 퍼스트)",
-    place: "1003동 213호",
-  });
+  // const [output, SetOutput] = useState({
+  //   계약자: "홍길동",
+  //   등록번호: "536-87-01775",
+  //   상호법인명: "홍대우리민박",
+  //   주소: "경기도 고양시 덕양구 향기5로 66 (향동동, DMC 두산위브 더 퍼스트)",
+  //   place: "1003동 213호",
+  // });
+
+  const [output, setOutput] = useState(null)
+  console.log('output: ', output);
 
   const location = useLocation();
 
-  const {scanResult} = location.state || {};
+  const {result} = location.state || {};
 
-  console.log('scanResult: ', scanResult);
+  console.log('scanResult: ', result);
 
-
+  useEffect(()=> {
+    setOutput(result)
+    setOutput(preState => ({...preState, placeDetail:"1003동 213호"}))
+  },[])
+  
 
   const onTop = () => {
     window.scrollTo({
@@ -62,7 +69,7 @@ export default function ScanOutput() {
             계약자
           </Typography>
           <Typography variant="h5" sx={{ mt: "11px" }} className="scan-output">
-            {output.계약자}
+            {output?.bussinessType}
           </Typography>
           <Divider sx={{ mt: "13px", mb: "20px" }} />
         </div>
@@ -71,7 +78,7 @@ export default function ScanOutput() {
             등록번호
           </Typography>
           <Typography variant="h5" sx={{ mt: "11px" }} className="scan-output">
-            {output.등록번호}
+            {output?.registerNumber}
           </Typography>
           <Divider sx={{ mt: "13px", mb: "20px" }} />
         </div>
@@ -80,7 +87,7 @@ export default function ScanOutput() {
             상호(법인)명
           </Typography>
           <Typography variant="h5" sx={{ mt: "11px" }} className="scan-output">
-            {output.상호법인명}
+            {output?.companyName}
           </Typography>
           <Divider sx={{ mt: "13px", mb: "20px" }} />
         </div>
@@ -94,7 +101,7 @@ export default function ScanOutput() {
               sx={{ mt: "11px" }}
               className="scan-output"
             >
-              {output.주소}
+              {output?.address}
             </Typography>
             <button style={{marginLeft: "5px"}}>주소검색</button>
           </div>
@@ -102,7 +109,7 @@ export default function ScanOutput() {
         </div>
         <div>
           <Typography variant="h5" sx={{ mt: "11px" }} className="scan-output">
-            {output.place}
+            {output?.placeDetail}
           </Typography>
           <Divider sx={{ mt: "13px", mb: "20px" }} />
         </div>
