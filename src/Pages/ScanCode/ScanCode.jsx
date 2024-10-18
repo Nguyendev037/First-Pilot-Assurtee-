@@ -41,6 +41,8 @@ export default function ScanCode() {
       // Move to the next input if the current one is filled
       if (newValue && index < 9) {
         inputRefs.current[index + 1].focus();
+      } else if ((newValue === "" && index > 0)){
+         inputRefs.current[index-1].focus();
       }
 
       const isAllFilled = updateValues.every((value) => value !== "");
